@@ -19,7 +19,7 @@ plt.figure(figsize=(8, 6))
 
 # Tracer x^k pour k = 1 à 5
 for k in range(1, 6):
-    y = x**k
+    y = x**k^2
     plt.plot(x, y, label=f"y = x^{k}")
 
 plt.title("Courbes de y = x^k pour k = 1 à 5")
