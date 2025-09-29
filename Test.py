@@ -3,28 +3,30 @@ import matplotlib.pyplot as plt
 import os
 
 # Génération des données
-x = np.linspace(-10, 10, 400)   # 400 points entre -10 et 10
-y = x**2
+x = np.linspace(-10, 10, 400)
 
 # Création du graphique
-plt.figure(figsize=(6, 4))
-plt.plot(x, y, label="y = x^2")
-plt.title("Courbe de y = x^2")
+plt.figure(figsize=(8, 6))
+
+# Tracer x^k pour k = 1 à 5
+for k in range(1, 6):
+    y = x**k
+    plt.plot(x, y, label=f"y = x^{k}")
+
+plt.title("Courbes de y = x^k pour k = 1 à 5")
 plt.xlabel("x")
 plt.ylabel("y")
 plt.grid(True)
 plt.legend()
 
-# Chemin complet pour sauvegarder l'image
-output_path = "/Users/robinguichon/Desktop/MattApp/Git/Test/x2_plot.png"
-
-# Crée le dossier si jamais il n'existe pas
+# Chemin de sauvegarde
+output_path = "/Users/robinguichon/Desktop/MattApp/Git/Test/xk_plots.png"
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-# Sauvegarde l'image
+# Sauvegarde
 plt.savefig(output_path)
 
-# Affiche la courbe
+# Affiche
 plt.show()
 
 print(f"Graphique sauvegardé dans : {output_path}")
