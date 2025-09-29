@@ -3,19 +3,24 @@ import matplotlib.pyplot as plt
 import os
 import shutil
 
-# Dossier de sortie
-output_dir = "/Users/robinguichon/Desktop/MattApp/Git/Test"
+# Liste des dossiers où sauvegarder les figures
+output_dirs = [
+    "/Users/robinguichon/Desktop/MattApp/Git/Test",
+    "/Users/robinguichon/Desktop/MattApp/Git/Test1",
+    "/Users/robinguichon/Desktop/MattApp/Git/Test2",
+    "/Users/robinguichon/Desktop/MattApp/Git/Test3"
+]
 
-# ⚠️ Vide entièrement le dossier Test/ puis le recrée (comme demandé précédemment)
-if os.path.exists(output_dir):
-    shutil.rmtree(output_dir)
-os.makedirs(output_dir, exist_ok=True)
+# ⚠️ Vide chaque dossier avant de recréer
+for d in output_dirs:
+    if os.path.exists(d):
+        shutil.rmtree(d)
+    os.makedirs(d, exist_ok=True)
 
 # Domaine de x
 x = np.linspace(-10, 10, 400)
 
-# Trace et enregistre une figure par k
-saved = []
+# Trace et enregistre une figure par k, dans chaque dossier
 for k in range(1, 6):
     y = x**k
 
@@ -27,11 +32,11 @@ for k in range(1, 6):
     plt.grid(True)
     plt.legend()
 
-    out_path = os.path.join(output_dir, f"x_pow_{k}.png")
-    plt.savefig(out_path)
-    plt.close()
-    saved.append(out_path)
+    # Sauvegarde dans chaque dossier
+    for d in output_dirs:
+        out_path = os.path.join(d, f"x_pow_{k}.png")
+        plt.savefig(out_path)
 
-print("✅ Graphiques enregistrés :")
-for p in saved:
-    print(" -", p)
+    plt.close()
+
+print("✅ Graphiques enregistrés dans Test, Test1, Test2 et Test3")
