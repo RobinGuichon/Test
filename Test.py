@@ -3,40 +3,35 @@ import matplotlib.pyplot as plt
 import os
 import shutil
 
-# Dossier de sauvegarde
+# Dossier de sortie
 output_dir = "/Users/robinguichon/Desktop/MattApp/Git/Test"
 
-# Supprime tout le dossier Test s'il existe, puis le recrée vide
+# ⚠️ Vide entièrement le dossier Test/ puis le recrée (comme demandé précédemment)
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.makedirs(output_dir, exist_ok=True)
 
-# Génération des données
+# Domaine de x
 x = np.linspace(-10, 10, 400)
 
-# Création du graphique
-plt.figure(figsize=(8, 6))
-
-# Tracer x^k pour k = 1 à 5
+# Trace et enregistre une figure par k
+saved = []
 for k in range(1, 6):
-    y = x**(k^2)
+    y = x**k
+
+    plt.figure(figsize=(8, 6))
     plt.plot(x, y, label=f"y = x^{k}")
+    plt.title(f"Courbe de y = x^{k}")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.grid(True)
+    plt.legend()
 
-plt.title("Courbes de y = x^k pour k = 1 à 5")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.grid(True)
-plt.legend()
+    out_path = os.path.join(output_dir, f"x_pow_{k}.png")
+    plt.savefig(out_path)
+    plt.close()
+    saved.append(out_path)
 
-# Chemin de sauvegarde de l’image
-output_path = os.path.join(output_dir, "xk_plots.png")
-
-# Sauvegarde
-plt.savefig(output_path)
-
-# Affiche
-plt.show()
-
-print(f"✅ Dossier vidé et nouveau graphique sauvegardé dans : {output_path}")
-
-
+print("✅ Graphiques enregistrés :")
+for p in saved:
+    print(" -", p)
