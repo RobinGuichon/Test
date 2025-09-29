@@ -38,3 +38,5 @@ plt.savefig(output_path)
 plt.show()
 
 print(f"✅ Dossier vidé et nouveau graphique sauvegardé dans : {output_path}")
+
+c
