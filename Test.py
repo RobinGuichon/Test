@@ -1,6 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import shutil
+
+# Dossier de sauvegarde
+output_dir = "/Users/robinguichon/Desktop/MattApp/Git/Test"
+
+# Supprime tout le dossier Test s'il existe, puis le recrée vide
+if os.path.exists(output_dir):
+    shutil.rmtree(output_dir)
+os.makedirs(output_dir, exist_ok=True)
 
 # Génération des données
 x = np.linspace(-10, 10, 400)
@@ -19,9 +28,8 @@ plt.ylabel("y")
 plt.grid(True)
 plt.legend()
 
-# Chemin de sauvegarde
-output_path = "/Users/robinguichon/Desktop/MattApp/Git/Test/xk_plots.png"
-os.makedirs(os.path.dirname(output_path), exist_ok=True)
+# Chemin de sauvegarde de l’image
+output_path = os.path.join(output_dir, "xk_plots.png")
 
 # Sauvegarde
 plt.savefig(output_path)
@@ -29,4 +37,4 @@ plt.savefig(output_path)
 # Affiche
 plt.show()
 
-print(f"Graphique sauvegardé dans : {output_path}")
+print(f"✅ Dossier vidé et nouveau graphique sauvegardé dans : {output_path}")
